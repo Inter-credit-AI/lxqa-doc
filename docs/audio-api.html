@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>联信’自呼机器人‘ REST API</title>
+  <meta name="description" content="自呼机器人REST API 接口文档">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="联信’自呼机器人‘ REST API" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="自呼机器人REST API 接口文档" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="联信’自呼机器人‘ REST API" />
+  
+  <meta name="twitter:description" content="自呼机器人REST API 接口文档" />
+  
+
+<meta name="author" content="联信策略中心">
+
+
+<meta name="date" content="2018-09-03">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="json-api.html">
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://github.com/DataXujing/lxqa-api" target='blank'>项目地址</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>REST API</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 简介</a></li>
+<li class="chapter" data-level="2" data-path="json-api.html"><a href="json-api.html"><i class="fa fa-check"></i><b>2</b> 返回JSON的API</a><ul>
+<li class="chapter" data-level="2.1" data-path="json-api.html"><a href="json-api.html#get"><i class="fa fa-check"></i><b>2.1</b> <strong>GET请求的格式：</strong></a></li>
+<li class="chapter" data-level="2.2" data-path="json-api.html"><a href="json-api.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> <strong>举个栗子：</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="json-api.html"><a href="json-api.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> <strong>调用方式</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="audio-api.html"><a href="audio-api.html"><i class="fa fa-check"></i><b>3</b> 返回Audio的API</a><ul>
+<li class="chapter" data-level="3.1" data-path="audio-api.html"><a href="audio-api.html#get-1"><i class="fa fa-check"></i><b>3.1</b> <strong>GET请求的格式</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="audio-api.html"><a href="audio-api.html#-1"><i class="fa fa-check"></i><b>3.2</b> <strong>举个栗子：</strong></a></li>
+<li class="chapter" data-level="3.3" data-path="audio-api.html"><a href="audio-api.html#-1"><i class="fa fa-check"></i><b>3.3</b> <strong>调用方式</strong></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://www.inter-credit.net/" target="blank">公司主页</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">联信’自呼机器人‘ REST API</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="audio-api" class="section level1">
+<h1><span class="header-section-number">第 3 章</span> 返回Audio的API</h1>
+<p>我们除了提供了JSON字符串格式的API之外，还提供了音频返回的REST API，该API接口除了返回标准的JSON字符串之外，还额外的返回了，当前自呼机器人聊天的语音文本(语音格式是.mp3),基于GET请求中types参数的变化(1types=1:温暖女法务版，types=2:专业男法务版;types=3:专业男法务磁性版), 类似于百度云语音中的TTS REST API接口支持语音的在线试听和下载。目前该API接口仅支持GET请求。</p>
+<div id="get-1" class="section level2">
+<h2><span class="header-section-number">3.1</span> <strong>GET请求的格式</strong></h2>
+<pre><code>http://ip:port/lxqa/api/v1.0/audio/types=&lt;types&gt;&amp;answer=&lt;answer&gt;&amp;ask_pre=&lt;ask_pre&gt;
+        &amp;name=&lt;name&gt;&amp;money=&lt;money&gt;&amp;date=&lt;date&gt;&amp;account=&lt;account&gt;/
+#注意与JSON API的区别</code></pre>
+<ul>
+<li><p>ip：ip地址，具体的联信商务咨询有限公司会提供</p></li>
+<li><p>port： 端口号，具体的联信商务咨询有限公司会提供</p></li>
+<li><p>types： 发声人，目前我们提供了三个发声人types=1:温暖女法务版，types=2:专业男法务版;types=3:专业男法务磁性版</p></li>
+<li><p>answer： 上一轮债务人的反应对应的文本</p></li>
+<li><p>ask_pre：上一轮联信自呼机器人的话术模板</p></li>
+<li><p>name： 债务人的姓名</p></li>
+<li><p>identity: 债务人身份确认，可能性的取值有：0(当前无法判断),本人，其他联系人，异主</p></li>
+<li><p>money：债务人对应的委案金额</p></li>
+<li><p>date：接单时间</p></li>
+<li><p>account：账户</p></li>
+</ul>
+</div>
+<div id="-1" class="section level2">
+<h2><span class="header-section-number">3.2</span> <strong>举个栗子：</strong></h2>
+<p>Example1:开始拨打电话，此时并没有answer和ask_pre字段，此时需用“0”填补这两个字段，此时的URL为：</p>
+<pre><code>http://ip:port/lxqa/api/v1.0/audio/types=1&amp;answer=0&amp;ask_pre=0&amp;
+      name=徐静&amp;money=100.1&amp;date=2018-01-01&amp;account=testcount/</code></pre>
+<ul>
+<li><p>types=1:调用温暖女法务版机器人</p></li>
+<li><p>answer=0和ask_pre=0: 因是第一轮对话，没有answer和ask_pre因此传入参数“0”</p></li>
+<li><p>name=徐静：债务人的姓名叫徐静</p></li>
+<li><p>money=100.1:债务人的欠款金额是100.1</p></li>
+<li><p>date=2018-01-01: 债务人的案件的接单时间是2018年01月01日(注意该格式可以是任意类型的时间字符串)</p></li>
+<li><p>account=testcount: 债务人对应的系统账户为testcount</p></li>
+</ul>
+<p>此时GET请求将会返回如下的JSON字符串</p>
+<p><img src="img/3-1.png" width="150%" height="150%" style="display: block; margin: auto;" /></p>
+<p>录音对应文本：当前自呼机器人的返回内容</p>
+<p>录音链接：下载录音的地址</p>
+<p>LXQA JSON 同第二章相同：</p>
+<ul>
+<li><p>QAask: 当前自呼机器人的表述</p></li>
+<li><p>QAstate: 当前自呼机器人的是否挂断的判断：“0”表示不挂断，“1”表示挂断，结束通话</p></li>
+<li><p>account: 债务人的账户</p></li>
+<li><p>answer: 债务人上一轮的表述</p></li>
+<li><p>ask_in: 当前聊天机器人的话术模板，作为下一轮调用自呼机器人的ask_pre参数取值（GET请求时，ask_pre字段应该提交聊天机器人的话术）</p></li>
+<li><p>message: API调用的状态，“0”表示调用API异常，“1”表示调用API正常</p></li>
+<li><p>types: 返回聊天机器人对用的音频文件</p></li>
+<li><p>identity: 债务人身份确认，可能性的取值有：0(当前无法判断),本人，其他联系人，异主</p></li>
+</ul>
+<p>Example2：聊天过程中的调用，此时存在answer和ask_pre字段，此时需用传入真实的字段文本内容，此时的URL为：</p>
+<pre><code>http://ip:port/lxqa/api/v1.0/audio/types=1&amp;answer=不是啊&amp;
+  ask_pre=你好,请问你是name吗&amp;money=100.1&amp;date=2018-01-01&amp;account=textcount/</code></pre>
+<p><img src="img/3-2.png" width="150%" height="150%" style="display: block; margin: auto;" /></p>
+<p>返回的JSON字段意义同Example1中，但要注意，在过程中GET请求的数据一定要填写answer和ask_pre字段，并且ask_pre字段的是聊天机器人的话术模板，而非真正的ask字段。</p>
+</div>
+<div id="-1" class="section level2">
+<h2><span class="header-section-number">3.3</span> <strong>调用方式</strong></h2>
+<p>可以通过Java,Python,R语言等工具，通过GET请求访问并实时获取API的数据。</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="json-api.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["lxqa-API.pdf", "lxqa-API.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>联信’自呼机器人‘ REST API</title>
+  <meta name="description" content="自呼机器人REST API 接口文档">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="联信’自呼机器人‘ REST API" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="自呼机器人REST API 接口文档" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="联信’自呼机器人‘ REST API" />
+  
+  <meta name="twitter:description" content="自呼机器人REST API 接口文档" />
+  
+
+<meta name="author" content="联信策略中心">
+
+
+<meta name="date" content="2018-09-03">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="json-api.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="css\style.css" type="text/css" />
+<link rel="stylesheet" href="css\toc.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="https://github.com/DataXujing/lxqa-api" target='blank'>项目地址</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>REST API</a></li>
+<li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> 简介</a></li>
+<li class="chapter" data-level="2" data-path="json-api.html"><a href="json-api.html"><i class="fa fa-check"></i><b>2</b> 返回JSON的API</a><ul>
+<li class="chapter" data-level="2.1" data-path="json-api.html"><a href="json-api.html#get"><i class="fa fa-check"></i><b>2.1</b> <strong>GET请求的格式：</strong></a></li>
+<li class="chapter" data-level="2.2" data-path="json-api.html"><a href="json-api.html#section-2.2"><i class="fa fa-check"></i><b>2.2</b> <strong>举个栗子：</strong></a></li>
+<li class="chapter" data-level="2.3" data-path="json-api.html"><a href="json-api.html#section-2.3"><i class="fa fa-check"></i><b>2.3</b> <strong>调用方式</strong></a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="audio-api.html"><a href="audio-api.html"><i class="fa fa-check"></i><b>3</b> 返回Audio的API</a><ul>
+<li class="chapter" data-level="3.1" data-path="audio-api.html"><a href="audio-api.html#get-1"><i class="fa fa-check"></i><b>3.1</b> <strong>GET请求的格式</strong></a></li>
+<li class="chapter" data-level="3.2" data-path="audio-api.html"><a href="audio-api.html#-1"><i class="fa fa-check"></i><b>3.2</b> <strong>举个栗子：</strong></a></li>
+<li class="chapter" data-level="3.3" data-path="audio-api.html"><a href="audio-api.html#-1"><i class="fa fa-check"></i><b>3.3</b> <strong>调用方式</strong></a></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="http://www.inter-credit.net/" target="blank">公司主页</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">联信’自呼机器人‘ REST API</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="intro" class="section level1">
+<h1><span class="header-section-number">第 1 章</span> 简介</h1>
+<p>联信自呼机器人1.0，针对于小金额或前排案件进行自动问答，融入了催收策略并以机器人为主导的催收策略引导为核心，通过NLP的技术，实现自动问答，并且自动判断 通话结束节点,判断对方通话人员的身份,该机器人以主叫方存在，问答过程中因为需要考虑上下文逻辑关系，因此传参过程中需要传入当前被叫人说话的文本和上一轮对话中机器人的问题作为调用 参数。</p>
+<p>联信机器人以REST API的方式提供服务，目前仅支持GET请求。</p>
+<pre><code>http://ip:port/lxqa/api/v1.0/types=&lt;types&gt;&amp;answer=&lt;answer&gt;&amp;ask_pre=&lt;ask_pre&gt;&amp;
+        name=&lt;name&gt;&amp;money=&lt;money&gt;&amp;date=&lt;date&gt;&amp;account=&lt;account&gt;/
+</code></pre>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="json-api.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["lxqa-API.pdf", "lxqa-API.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
